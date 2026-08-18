@@ -506,6 +506,20 @@
     font-size:15px;
     max-width:680px;
   }
+
+  /* ---------- CLÁUSULA INFORMATIVA ---------- */
+  .clausula{
+    margin-top:10px;
+    max-width:760px;
+    color:var(--brown-2);
+    font-size:11.5px;
+    line-height:1.5;
+  }
+  .clausula strong{
+    color:var(--brown);
+    font-weight:700;
+  }
+
   .program-note{
     font-family:'Fredoka',sans-serif;
     color:var(--brown-2);
@@ -951,6 +965,12 @@
       <div>
         <h2>Beneficios al ser seleccionada 🐾 💛</h2>
         <p>Al integrar nuestra comunidad, su marca accede a espacios oficiales de difusión y colaboración pensados para crecer juntos.</p>
+
+        <div class="clausula">
+          <strong>Cláusula:</strong><br>
+          La membresía no incluye alquiler de stand ni premios por evento.<br>
+          La afiliación anual de S/69.90 no incluye el alquiler de stand en ferias, costo que en algunos casos cobran las municipalidades o locales privados, ni los premios que se solicitarán por evento para dinámicas y sorteos. Ambos conceptos serán informados con anticipación.
+        </div>
       </div>
       <div class="program-note">✧ Programa oficial Baby Golden Perú</div>
     </div>
@@ -1017,7 +1037,7 @@
             <input type="text" name="razon_social" placeholder="Nombre legal de la empresa">
           </div>
           <div class="field">
-            <label>RUC O DNI</label>
+            <label>RUC o DNI</label>
             <input type="text" name="ruc" inputmode="numeric" placeholder="Ej. 20XXXXXXXXX">
           </div>
         </div>
@@ -1036,7 +1056,7 @@
         <div class="row2">
           <div class="field">
             <label>WhatsApp<span class="req">*</span></label>
-            <input type="tel" name="whatsapp" placeholder="+51 9XX XXX XXX" required>
+            <input type="tel" name="whatsapp" placeholder="+9XX XXX XXX" required>
           </div>
           <div class="field">
             <label>Correo electrónico<span class="req">*</span></label>
@@ -1477,4 +1497,3 @@
 
 </body>
 </html>
-
