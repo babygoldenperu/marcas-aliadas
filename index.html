@@ -1241,6 +1241,22 @@
   <footer>Baby Golden Perú · Comunidad de marcas aliadas</footer>
 </div>
 
+  <div class="success-overlay" id="successModal" aria-hidden="true">
+    <div class="success-modal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+      <button class="success-close" id="successClose" type="button" aria-label="Cerrar">×</button>
+      <div class="success-icon">🐾</div>
+      <div class="success-kicker">💛 Postulación recibida</div>
+      <h2 id="successTitle">¡Gracias por confiar en Baby Golden Perú!</h2>
+      <p>Hemos recibido correctamente la información de tu marca. Nuestro equipo revisará tu postulación y se pondrá en contacto contigo si eres seleccionada para formar parte de nuestra familia de Marcas Aliadas.</p>
+      <div class="success-meta">
+        <div class="success-meta-item"><span>Estado</span><strong>🟡 Pendiente de evaluación</strong></div>
+        <div class="success-meta-item"><span>Registro</span><strong>✓ Información guardada</strong></div>
+      </div>
+      <div class="success-actions"><button class="success-primary" id="successClosePrimary" type="button">Cerrar y volver</button><button class="success-secondary" id="successTop" type="button">Volver al inicio</button></div>
+      <div class="success-foot">Baby Golden Perú · Marcas Aliadas · Gracias por sumarte con el corazón 🐶💛</div>
+    </div>
+  </div>
+
 <script>
   /*
     ============================================================
@@ -1445,32 +1461,33 @@
   const successClose = document.getElementById('successClose');
   const successClosePrimary = document.getElementById('successClosePrimary');
   const successTop = document.getElementById('successTop');
-  function openSuccessModal(){successModal.classList.add('show');successModal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
-  function closeSuccessModal(scrollTop=false){successModal.classList.remove('show');successModal.setAttribute('aria-hidden','true');document.body.style.overflow='';if(scrollTop) window.scrollTo({top:0,behavior:'smooth'});}
-  successClose.addEventListener('click',()=>closeSuccessModal(false));
-  successClosePrimary.addEventListener('click',()=>closeSuccessModal(false));
-  successTop.addEventListener('click',()=>closeSuccessModal(true));
-  successModal.addEventListener('click',(event)=>{if(event.target===successModal)closeSuccessModal(false);});
-  document.addEventListener('keydown',(event)=>{if(event.key==='Escape'&&successModal.classList.contains('show'))closeSuccessModal(false);});
+
+  function openSuccessModal(){
+    if(!successModal) return;
+    successModal.classList.add('show');
+    successModal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+
+  function closeSuccessModal(scrollTop=false){
+    if(!successModal) return;
+    successModal.classList.remove('show');
+    successModal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    if(scrollTop) window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  if(successClose) successClose.addEventListener('click',()=>closeSuccessModal(false));
+  if(successClosePrimary) successClosePrimary.addEventListener('click',()=>closeSuccessModal(false));
+  if(successTop) successTop.addEventListener('click',()=>closeSuccessModal(true));
+  if(successModal) successModal.addEventListener('click',(event)=>{if(event.target===successModal)closeSuccessModal(false);});
+  document.addEventListener('keydown',(event)=>{if(event.key==='Escape'&&successModal?.classList.contains('show'))closeSuccessModal(false);});
+
 
 </script>
 
 
-  <div class="success-overlay" id="successModal" aria-hidden="true">
-    <div class="success-modal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
-      <button class="success-close" id="successClose" type="button" aria-label="Cerrar">×</button>
-      <div class="success-icon">🐾</div>
-      <div class="success-kicker">💛 Postulación recibida</div>
-      <h2 id="successTitle">¡Gracias por confiar en Baby Golden Perú!</h2>
-      <p>Hemos recibido correctamente la información de tu marca. Nuestro equipo revisará tu postulación y se pondrá en contacto contigo si eres seleccionada para formar parte de nuestra familia de Marcas Aliadas.</p>
-      <div class="success-meta">
-        <div class="success-meta-item"><span>Estado</span><strong>🟡 Pendiente de evaluación</strong></div>
-        <div class="success-meta-item"><span>Registro</span><strong>✓ Información guardada</strong></div>
-      </div>
-      <div class="success-actions"><button class="success-primary" id="successClosePrimary" type="button">Cerrar y volver</button><button class="success-secondary" id="successTop" type="button">Volver al inicio</button></div>
-      <div class="success-foot">Baby Golden Perú · Marcas Aliadas · Gracias por sumarte con el corazón 🐶💛</div>
-    </div>
-  </div>
+
 
 </body>
 </html>
