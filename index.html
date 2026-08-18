@@ -227,7 +227,12 @@
     box-shadow:inset 0 10px 20px rgba(255,255,255,.38);
   }
 
-  .dog-spot svg{width:126px;height:126px}
+  .dog-spot img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
 
   .visual-title{
     position:relative;
@@ -897,28 +902,10 @@
             <span class="mini-badge">Marca Aliada</span>
           </div>
 
-          <div class="dog-spot" aria-label="Ilustración de Cherry">
-            <svg viewBox="0 0 160 160" role="img" aria-hidden="true">
-              <defs>
-                <linearGradient id="fur" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#9C6A45"/>
-                  <stop offset="100%" stop-color="#6B402D"/>
-                </linearGradient>
-              </defs>
-              <ellipse cx="80" cy="86" rx="48" ry="42" fill="url(#fur)"/>
-              <ellipse cx="56" cy="69" rx="16" ry="32" fill="#70422F"/>
-              <ellipse cx="104" cy="69" rx="16" ry="32" fill="#70422F"/>
-              <ellipse cx="80" cy="94" rx="26" ry="28" fill="#E6BB88"/>
-              <circle cx="66" cy="83" r="5.5" fill="#2F221C"/>
-              <circle cx="94" cy="83" r="5.5" fill="#2F221C"/>
-              <ellipse cx="80" cy="97" rx="10" ry="7.5" fill="#2A1D17"/>
-              <path d="M72 108 Q80 116 88 108" fill="none" stroke="#5A3628" stroke-width="3.5" stroke-linecap="round"/>
-              <path d="M45 44 Q39 23 58 18 Q61 37 56 49" fill="#7B4D33"/>
-              <path d="M115 44 Q121 23 102 18 Q99 37 104 49" fill="#7B4D33"/>
-              <circle cx="80" cy="126" r="6" fill="#F4C24E"/>
-            </svg>
-          </div>
-
+        <div class="dog-spot" aria-label="Familia Baby Golden Perú">
+          <img src="cherry.jpg" alt="Familia Baby Golden Perú">
+        </div>
+          
           <div class="visual-title">
             <div class="tag">CHERRY · NUESTRA GOLDEN 💛</div>
             <h3>Miércoles de Cherry 🐶</h3>
