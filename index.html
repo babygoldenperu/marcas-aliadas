@@ -506,20 +506,6 @@
     font-size:15px;
     max-width:680px;
   }
-
-  /* ---------- CLÁUSULA INFORMATIVA ---------- */
-  .clausula{
-    margin-top:10px;
-    max-width:760px;
-    color:var(--brown-2);
-    font-size:11.5px;
-    line-height:1.5;
-  }
-  .clausula strong{
-    color:var(--brown);
-    font-weight:700;
-  }
-
   .program-note{
     font-family:'Fredoka',sans-serif;
     color:var(--brown-2);
@@ -965,12 +951,6 @@
       <div>
         <h2>Beneficios al ser seleccionada 🐾 💛</h2>
         <p>Al integrar nuestra comunidad, su marca accede a espacios oficiales de difusión y colaboración pensados para crecer juntos.</p>
-
-        <div class="clausula">
-          <strong>Cláusula:</strong><br>
-          La membresía no incluye alquiler de stand ni premios por evento.<br>
-          La afiliación anual de S/69.90 no incluye el alquiler de stand en ferias, costo que en algunos casos cobran las municipalidades o locales privados, ni los premios que se solicitarán por evento para dinámicas y sorteos. Ambos conceptos serán informados con anticipación.
-        </div>
       </div>
       <div class="program-note">✧ Programa oficial Baby Golden Perú</div>
     </div>
@@ -1037,7 +1017,7 @@
             <input type="text" name="razon_social" placeholder="Nombre legal de la empresa">
           </div>
           <div class="field">
-            <label>RUC o DNI</label>
+            <label>RUC O DNI</label>
             <input type="text" name="ruc" inputmode="numeric" placeholder="Ej. 20XXXXXXXXX">
           </div>
         </div>
@@ -1056,7 +1036,18 @@
         <div class="row2">
           <div class="field">
             <label>WhatsApp<span class="req">*</span></label>
-            <input type="tel" name="whatsapp" placeholder="+9XX XXX XXX" required>
+            <input
+              type="tel"
+              name="whatsapp"
+              id="whatsapp"
+              placeholder="9XX XXX XXX"
+              inputmode="numeric"
+              pattern="[0-9]{9}"
+              minlength="9"
+              maxlength="9"
+              autocomplete="tel"
+              required
+            >
           </div>
           <div class="field">
             <label>Correo electrónico<span class="req">*</span></label>
@@ -1386,7 +1377,7 @@
     const fechaTexto = formData.get('valido_hasta')?.trim() || '';
     const fechaISO = fechaTexto ? parseSpanishDate(fechaTexto) : null;
     if (fechaTexto && !fechaISO) {
-      showError('La fecha debe tener el formato dd/mm/aaaa. Ejemplo: 31/12/2026.');
+      showError('La fecha debe tener el formato dd/mm/aaaa y no puede ser anterior a hoy.');
       submitButton.disabled = false;
       submitButton.textContent = 'Enviar mi postulación 🐶';
       form.classList.remove('loading');
@@ -1443,6 +1434,15 @@
     }
   });
 
+
+  const whatsappInput = document.getElementById('whatsapp');
+
+  if (whatsappInput) {
+    whatsappInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+    });
+  }
+
   const validoHastaInput = document.getElementById('validoHasta');
   if (validoHastaInput) {
     validoHastaInput.addEventListener('input', (e) => {
@@ -1454,12 +1454,51 @@
     });
   }
 
+
+  if (validoHastaInput) {
+    validoHastaInput.addEventListener('blur', () => {
+      const value = validoHastaInput.value.trim();
+      if (!value) return;
+
+      const parsed = parseSpanishDate(value);
+      if (!parsed) {
+        validoHastaInput.setCustomValidity(
+          'Ingresa una fecha válida en formato dd/mm/aaaa, igual o posterior a hoy.'
+        );
+      } else {
+        validoHastaInput.setCustomValidity('');
+      }
+    });
+
+    validoHastaInput.addEventListener('input', () => {
+      validoHastaInput.setCustomValidity('');
+    });
+  }
+
   function parseSpanishDate(value){
-    const match = /^([0-3]\d)\/([0-1]\d)\/(\d{4})$/.exec((value||'').trim());
+    const match = /^([0-3]\d)\/([0-1]\d)\/(\d{4})$/.exec((value || '').trim());
     if(!match) return null;
-    const day=Number(match[1]), month=Number(match[2]), year=Number(match[3]);
-    const d=new Date(Date.UTC(year,month-1,day));
-    if(d.getUTCFullYear()!==year || d.getUTCMonth()!==month-1 || d.getUTCDate()!==day) return null;
+
+    const day = Number(match[1]);
+    const month = Number(match[2]);
+    const year = Number(match[3]);
+
+    const date = new Date(year, month - 1, day);
+    if(
+      date.getFullYear() !== year ||
+      date.getMonth() !== month - 1 ||
+      date.getDate() !== day
+    ){
+      return null;
+    }
+
+    // No permitir fechas anteriores al día actual.
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0);
+
+    if(date < today) return null;
+
     return `${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
   }
 
