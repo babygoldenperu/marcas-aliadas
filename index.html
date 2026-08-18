@@ -606,6 +606,192 @@
     .benefit-footnote{position:static;margin-top:18px}
   }
 
+
+  /* ---------- SUCCESS MODAL ---------- */
+  .success-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:22px;
+    background:rgba(62,38,28,.48);
+    backdrop-filter:blur(7px);
+    -webkit-backdrop-filter:blur(7px);
+  }
+  .success-overlay.show{
+    display:flex;
+    animation:fadeOverlay .22s ease-out;
+  }
+  .success-modal{
+    width:min(520px,100%);
+    background:#FFFCF7;
+    border:1px solid rgba(235,214,180,.95);
+    border-radius:30px;
+    padding:34px 30px 28px;
+    text-align:center;
+    box-shadow:0 34px 100px rgba(57,33,24,.28);
+    position:relative;
+    overflow:hidden;
+    animation:modalIn .28s cubic-bezier(.2,.8,.2,1);
+  }
+  .success-modal:before{
+    content:"";
+    position:absolute;
+    width:230px;
+    height:230px;
+    border-radius:50%;
+    background:rgba(244,194,78,.18);
+    top:-130px;
+    left:-110px;
+  }
+  .success-modal:after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(238,106,52,.10);
+    right:-100px;
+    bottom:-110px;
+  }
+  .success-close{
+    position:absolute;
+    top:13px;
+    right:13px;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:#FFF8EB;
+    color:var(--brown);
+    font-size:20px;
+    cursor:pointer;
+    z-index:3;
+  }
+  .success-icon{
+    position:relative;
+    z-index:2;
+    width:74px;
+    height:74px;
+    margin:0 auto 15px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#F4C24E,#E7A12D);
+    box-shadow:0 14px 30px rgba(232,169,42,.25);
+    font-size:34px;
+  }
+  .success-kicker{
+    position:relative;
+    z-index:2;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:#FFF3D6;
+    border:1px solid #F0DBA8;
+    color:var(--brown);
+    font:600 11px 'Fredoka',sans-serif;
+    padding:7px 11px;
+    border-radius:999px;
+    margin-bottom:12px;
+  }
+  .success-modal h2{
+    position:relative;
+    z-index:2;
+    font-size:32px;
+    line-height:1.08;
+    margin-bottom:9px;
+  }
+  .success-modal p{
+    position:relative;
+    z-index:2;
+    color:var(--brown-2);
+    font-size:15px;
+    line-height:1.7;
+    max-width:420px;
+    margin:0 auto 18px;
+  }
+  .success-meta{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:18px 0;
+  }
+  .success-meta-item{
+    background:#FFF8EB;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:12px 10px;
+    text-align:left;
+  }
+  .success-meta-item span{
+    display:block;
+    font-size:11px;
+    color:var(--brown-2);
+    margin-bottom:3px;
+  }
+  .success-meta-item strong{
+    display:block;
+    font-family:'Fredoka',sans-serif;
+    font-size:14px;
+    color:var(--brown);
+  }
+  .success-actions{
+    position:relative;
+    z-index:2;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin-top:8px;
+  }
+  .success-actions button{
+    border:0;
+    border-radius:12px;
+    padding:12px 16px;
+    font-family:'Fredoka',sans-serif;
+    font-size:14px;
+    cursor:pointer;
+  }
+  .success-primary{
+    background:linear-gradient(135deg,#D89028,#F0B83B);
+    color:#fff;
+    box-shadow:0 10px 22px -8px rgba(184,122,34,.45);
+  }
+  .success-secondary{
+    background:#FFF8EB;
+    border:1px solid var(--line) !important;
+    color:var(--brown);
+  }
+  .success-foot{
+    position:relative;
+    z-index:2;
+    margin-top:15px;
+    font-size:11.5px;
+    color:#9A806F;
+  }
+
+  @keyframes modalIn{
+    from{opacity:0;transform:translateY(14px) scale(.97)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+  @keyframes fadeOverlay{
+    from{opacity:0}
+    to{opacity:1}
+  }
+
+  @media (max-width:600px){
+    .success-modal{padding:30px 20px 22px;border-radius:24px}
+    .success-modal h2{font-size:28px}
+    .success-meta{grid-template-columns:1fr}
+    .success-actions{flex-direction:column}
+    .success-actions button{width:100%}
+  }
+
   footer{text-align:center;margin-top:44px;font-size:12.5px;color:var(--brown-2)}
 
 
@@ -1219,12 +1405,14 @@
     ============================================================
     SUPABASE
     ============================================================
-    Conexión directa de este formulario con Supabase.
-    Los datos públicos del proyecto se usan desde el navegador;
-    el acceso está protegido por las políticas RLS de Supabase.
+    1) Crea un proyecto en Supabase.
+    2) Crea la tabla "marcas_aliadas" con el SQL que te entregaré.
+    3) Crea un Storage bucket público llamado "logos-marcas".
+    4) Reemplaza SUPABASE_URL y SUPABASE_ANON_KEY por los datos
+       de tu proyecto.
   */
-  const SUPABASE_URL = 'https://cxgcmrpqqaachnfavplh.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY';
+  const SUPABASE_URL = 'PEGA_AQUI_TU_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = 'PEGA_AQUI_TU_SUPABASE_ANON_KEY';
   const STORAGE_BUCKET = 'logos-marcas';
 
   const dropZone = document.getElementById('dropZone');
@@ -1318,6 +1506,11 @@
     e.preventDefault();
     errorMessage.style.display = 'none';
 
+    if (SUPABASE_URL.includes('PEGA_AQUI') || SUPABASE_ANON_KEY.includes('PEGA_AQUI')) {
+      showError('Falta configurar Supabase. Coloca la URL y la clave anon de tu proyecto en este archivo.');
+      return;
+    }
+
     const logo = logoInput.files[0];
 
     if (!logo) {
@@ -1372,8 +1565,7 @@
       await insertBrand(data);
 
       form.style.display = 'none';
-      successState.style.display = 'block';
-      successState.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      openSuccessModal();
 
     } catch (error) {
       console.error(error);
@@ -1383,7 +1575,76 @@
       form.classList.remove('loading');
     }
   });
+
+  const successModal = document.getElementById('successModal');
+  const successClose = document.getElementById('successClose');
+  const successClosePrimary = document.getElementById('successClosePrimary');
+  const successTop = document.getElementById('successTop');
+
+  function openSuccessModal(){
+    successModal.classList.add('show');
+    successModal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+
+  function closeSuccessModal(scrollTop=false){
+    successModal.classList.remove('show');
+    successModal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    if(scrollTop){
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  }
+
+  successClose.addEventListener('click', () => closeSuccessModal(false));
+  successClosePrimary.addEventListener('click', () => closeSuccessModal(false));
+  successTop.addEventListener('click', () => closeSuccessModal(true));
+
+  successModal.addEventListener('click', (event) => {
+    if(event.target === successModal) closeSuccessModal(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if(event.key === 'Escape' && successModal.classList.contains('show')){
+      closeSuccessModal(false);
+    }
+  });
+
 </script>
+
+
+  <div class="success-overlay" id="successModal" aria-hidden="true">
+    <div class="success-modal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+      <button class="success-close" id="successClose" type="button" aria-label="Cerrar">×</button>
+      <div class="success-icon">🐾</div>
+      <div class="success-kicker">💛 Postulación recibida</div>
+      <h2 id="successTitle">¡Gracias por confiar en Baby Golden Perú!</h2>
+      <p>
+        Hemos recibido correctamente la información de tu marca. Nuestro equipo revisará tu postulación
+        y se pondrá en contacto contigo si eres seleccionada para formar parte de nuestra familia de Marcas Aliadas.
+      </p>
+
+      <div class="success-meta">
+        <div class="success-meta-item">
+          <span>Estado</span>
+          <strong>🟡 Pendiente de evaluación</strong>
+        </div>
+        <div class="success-meta-item">
+          <span>Registro</span>
+          <strong>✓ Información guardada</strong>
+        </div>
+      </div>
+
+      <div class="success-actions">
+        <button class="success-primary" id="successClosePrimary" type="button">Cerrar y volver</button>
+        <button class="success-secondary" id="successTop" type="button">Volver al inicio</button>
+      </div>
+
+      <div class="success-foot">
+        Baby Golden Perú · Marcas Aliadas · Gracias por sumarte con el corazón 🐶💛
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
