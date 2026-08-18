@@ -1219,14 +1219,12 @@
     ============================================================
     SUPABASE
     ============================================================
-    1) Crea un proyecto en Supabase.
-    2) Crea la tabla "marcas_aliadas" con el SQL que te entregaré.
-    3) Crea un Storage bucket público llamado "logos-marcas".
-    4) Reemplaza SUPABASE_URL y SUPABASE_ANON_KEY por los datos
-       de tu proyecto.
+    Conexión directa de este formulario con Supabase.
+    Los datos públicos del proyecto se usan desde el navegador;
+    el acceso está protegido por las políticas RLS de Supabase.
   */
-  const SUPABASE_URL = 'PEGA_AQUI_TU_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'PEGA_AQUI_TU_SUPABASE_ANON_KEY';
+  const SUPABASE_URL = 'https://cxgcmrpqqaachnfavplh.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY';
   const STORAGE_BUCKET = 'logos-marcas';
 
   const dropZone = document.getElementById('dropZone');
@@ -1319,11 +1317,6 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorMessage.style.display = 'none';
-
-    if (SUPABASE_URL.includes('PEGA_AQUI') || SUPABASE_ANON_KEY.includes('PEGA_AQUI')) {
-      showError('Falta configurar Supabase. Coloca la URL y la clave anon de tu proyecto en este archivo.');
-      return;
-    }
 
     const logo = logoInput.files[0];
 
