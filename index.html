@@ -2042,7 +2042,7 @@
 </svg></span>Destacada</span>
         </div>
         <h3>ID Card NFC · S/69.90 / 1 año</h3>
-        <p>ID Card con tecnología NFC por S/69.90 con vigencia de 1 año: su carta de presentación digital. Con solo acercar el celular, los Baby Golden acceden a sus beneficios, sin apps ni complicaciones. </p>
+        <p>ID Card con tecnología NFC por S/69.90 con vigencia de 1 año: su carta de presentación digital. Con solo acercar el celular, los Baby Golden acceden a sus beneficios, sin apps ni complicaciones. ✨</p>
         <div class="benefit-footnote">
           <span class="mini vector-mini" aria-hidden="true">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
@@ -2477,10 +2477,7 @@
     if (fechaTexto && !fechaISO) {
       showError('La fecha debe tener el formato dd/mm/aaaa y no puede ser anterior a hoy.');
       submitButton.disabled = false;
-      submitButton.textContent = '<span class="submit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <path d="M4 5.5L20 12 4 18.5 7.2 12 4 5.5z"/>
-  <path d="M7.2 12H20"/>
-</svg></span>Enviar mi postulación';
+      submitButton.textContent = 'Enviar mi postulación';
       form.classList.remove('loading');
       return;
     }
@@ -2530,10 +2527,7 @@
       console.error(error);
       showError(error.message || 'Ocurrió un error al enviar la postulación.');
       submitButton.disabled = false;
-      submitButton.textContent = '<span class="submit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <path d="M4 5.5L20 12 4 18.5 7.2 12 4 5.5z"/>
-  <path d="M7.2 12H20"/>
-</svg></span>Enviar mi postulación';
+      submitButton.textContent = 'Enviar mi postulación';
       form.classList.remove('loading');
     }
   });
@@ -2633,6 +2627,10 @@
   document.addEventListener('keydown',(event)=>{if(event.key==='Escape'&&successModal?.classList.contains('show'))closeSuccessModal(false);});
 
 
+
+  window.addEventListener('error', (event) => {
+    console.error('Error JavaScript:', event.error || event.message);
+  });
 </script>
 
 
