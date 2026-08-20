@@ -1857,7 +1857,164 @@
     height:14px;
     display:block;
   }
+/* =========================================================
+   CORRECCIÓN FINAL — VISTA MÓVIL
+   Presentación primero + panel NFC debajo
+========================================================= */
 
+@media (max-width:600px){
+
+  /* ---------- HERO COMPLETO ---------- */
+
+  .hero{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:28px !important;
+    min-height:0 !important;
+    height:auto !important;
+    padding:8px 0 30px !important;
+    overflow:visible !important;
+  }
+
+  /* ---------- TEXTO DE PRESENTACIÓN ---------- */
+
+  .hero-copy{
+    order:1 !important;
+    width:100% !important;
+    max-width:none !important;
+    padding:0 !important;
+  }
+
+  .intro-card{
+    width:100% !important;
+    max-width:none !important;
+    padding:24px 20px !important;
+    overflow:visible !important;
+  }
+
+  /* ---------- ÁREA VISUAL ---------- */
+
+  .hero-visual{
+    order:2 !important;
+    width:100% !important;
+    min-height:0 !important;
+    height:auto !important;
+    display:block !important;
+    transform:none !important;
+    overflow:visible !important;
+  }
+
+  /* ---------- CONTENEDOR DE CUADRO + NFC ---------- */
+
+  .visual-pair{
+    width:100% !important;
+    min-height:0 !important;
+    height:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:24px !important;
+    overflow:visible !important;
+  }
+
+  /* ---------- CUADRO BABY GOLDEN ---------- */
+
+  .visual-frame{
+    order:1 !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-height:0 !important;
+    height:auto !important;
+    padding:20px !important;
+    transform:none !important;
+    overflow:visible !important;
+  }
+
+  /* ---------- FOTO ---------- */
+
+  .dog-spot{
+    width:min(100%,290px) !important;
+    height:190px !important;
+    margin:24px auto 20px !important;
+  }
+
+  /* ---------- BENEFICIOS ---------- */
+
+  .benefit-card{
+    width:100% !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+    margin-top:18px !important;
+  }
+
+  /* ---------- CHIP NFC DEL CUADRO ---------- */
+
+  .nfc-chip{
+    position:relative !important;
+    left:auto !important;
+    bottom:auto !important;
+    margin:14px auto 0 !important;
+    transform:none !important;
+  }
+
+  /* ---------- PANEL / TARJETA NFC ---------- */
+
+  .idcard-wrap{
+    order:2 !important;
+    width:100% !important;
+    min-height:0 !important;
+    height:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    position:relative !important;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:visible !important;
+  }
+
+  .idcard{
+    position:relative !important;
+    width:270px !important;
+    height:170px !important;
+    margin:0 auto !important;
+    transform:none !important;
+  }
+
+  /* ---------- TEXTO / NOTAS DEL NFC ---------- */
+
+  .idcard-note{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    margin:14px auto 0 !important;
+    transform:none !important;
+  }
+
+  .visual-note{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    margin:10px auto 0 !important;
+    transform:none !important;
+  }
+
+  /* ---------- BADGE SUPERIOR ---------- */
+
+  .visual-badge{
+    position:relative !important;
+    top:auto !important;
+    right:auto !important;
+    margin:0 auto 12px !important;
+    display:table !important;
+  }
+
+}
 </style>
 </head>
 <body>
