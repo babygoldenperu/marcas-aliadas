@@ -2590,26 +2590,56 @@
     return `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${filePath}`;
   }
 
-  async function insertBrand(data) {
-    const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/marcas_aliadas`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'apikey': SUPABASE_ANON_KEY,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify(data)
-      }
-    );
+function limpiarTexto(valor) {
+  return String(valor ?? '')
+    .replace(/\u0000/g, '')
+    .trim();
+}
 
-    if (!response.ok) {
-      const text = await response.text();
-      throw new Error('No se pudo guardar la postulación. ' + text);
-    }
+function limpiarDatosParaSupabase(valor) {
+  if (typeof valor === 'string') {
+    return valor.replace(/\u0000/g, '');
   }
+
+  if (Array.isArray(valor)) {
+    return valor.map(limpiarDatosParaSupabase);
+  }
+
+  if (valor && typeof valor === 'object') {
+    const limpio = {};
+
+    for (const [clave, dato] of Object.entries(valor)) {
+      limpio[clave] = limpiarDatosParaSupabase(dato);
+    }
+
+    return limpio;
+  }
+
+  return valor;
+}
+
+async function insertBrand(data) {
+  const datosLimpios = limpiarDatosParaSupabase(data);
+
+  const response = await fetch(
+    `${SUPABASE_URL}/rest/v1/marcas_aliadas`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'apikey': SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(datosLimpios)
+    }
+  );
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error('No se pudo guardar la postulación. ' + text);
+  }
+}
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
